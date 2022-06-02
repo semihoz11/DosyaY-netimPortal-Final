@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TDersler">
+          <Key>
+            <PropertyRef Name="dersId" />
+          </Key>
+          <Property Name="dersId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dersKodu" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="dersAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dersKredi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TDosyaKayit">
+          <Key>
+            <PropertyRef Name="dkId" />
+          </Key>
+          <Property Name="dkId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dkDersId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dkDosyaId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TDosyalar">
+          <Key>
+            <PropertyRef Name="dosyaId" />
+          </Key>
+          <Property Name="dosyaId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dosyaAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dosyaFoto" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TKayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitDersId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitOgrId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitOgrtId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TKullanici">
+          <Key>
+            <PropertyRef Name="kulId" />
+          </Key>
+          <Property Name="kulId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kulAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kulSifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kulYetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kulOgrId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TOgrenci">
+          <Key>
+            <PropertyRef Name="ogrId" />
+          </Key>
+          <Property Name="ogrId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrYas" Type="int" Nullable="false" />
+          <Property Name="ogrKulAdi" Type="nchar" MaxLength="50" />
+          <Property Name="ogrKulYetki" Type="nchar" MaxLength="50" />
+          <Property Name="ogrKulSifre" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TOgretmen">
+          <Key>
+            <PropertyRef Name="ogrtId" />
+          </Key>
+          <Property Name="ogrtId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrtAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TDosyaKayit_TDersler">
+          <End Role="TDersler" Type="Self.TDersler" Multiplicity="1" />
+          <End Role="TDosyaKayit" Type="Self.TDosyaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDersler">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="TDosyaKayit">
+              <PropertyRef Name="dkDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TDosyaKayit_TDosyalar">
+          <End Role="TDosyalar" Type="Self.TDosyalar" Multiplicity="1" />
+          <End Role="TDosyaKayit" Type="Self.TDosyaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDosyalar">
+              <PropertyRef Name="dosyaId" />
+            </Principal>
+            <Dependent Role="TDosyaKayit">
+              <PropertyRef Name="dkDosyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TDersler">
+          <End Role="TDersler" Type="Self.TDersler" Multiplicity="1" />
+          <End Role="TKayit" Type="Self.TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDersler">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TOgrenci">
+          <End Role="TOgrenci" Type="Self.TOgrenci" Multiplicity="1" />
+          <End Role="TKayit" Type="Self.TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TOgretmen">
+          <End Role="TOgretmen" Type="Self.TOgretmen" Multiplicity="1" />
+          <End Role="TKayit" Type="Self.TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgretmen">
+              <PropertyRef Name="ogrtId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitOgrtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKullanici_TOgrenci">
+          <End Role="TOgrenci" Type="Self.TOgrenci" Multiplicity="1" />
+          <End Role="TKullanici" Type="Self.TKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="TKullanici">
+              <PropertyRef Name="kulOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB01ModelStoreContainer">
+          <EntitySet Name="TDersler" EntityType="Self.TDersler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TDosyaKayit" EntityType="Self.TDosyaKayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TDosyalar" EntityType="Self.TDosyalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TKayit" EntityType="Self.TKayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TKullanici" EntityType="Self.TKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOgrenci" EntityType="Self.TOgrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOgretmen" EntityType="Self.TOgretmen" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TDosyaKayit_TDersler" Association="Self.FK_TDosyaKayit_TDersler">
+            <End Role="TDersler" EntitySet="TDersler" />
+            <End Role="TDosyaKayit" EntitySet="TDosyaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TDosyaKayit_TDosyalar" Association="Self.FK_TDosyaKayit_TDosyalar">
+            <End Role="TDosyalar" EntitySet="TDosyalar" />
+            <End Role="TDosyaKayit" EntitySet="TDosyaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TDersler" Association="Self.FK_TKayit_TDersler">
+            <End Role="TDersler" EntitySet="TDersler" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TOgrenci" Association="Self.FK_TKayit_TOgrenci">
+            <End Role="TOgrenci" EntitySet="TOgrenci" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TOgretmen" Association="Self.FK_TKayit_TOgretmen">
+            <End Role="TOgretmen" EntitySet="TOgretmen" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKullanici_TOgrenci" Association="Self.FK_TKullanici_TOgrenci">
+            <End Role="TOgrenci" EntitySet="TOgrenci" />
+            <End Role="TKullanici" EntitySet="TKullanici" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB01Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TDersler" EntityType="DB01Model.TDersler" />
+          <EntitySet Name="TDosyaKayit" EntityType="DB01Model.TDosyaKayit" />
+          <EntitySet Name="TDosyalar" EntityType="DB01Model.TDosyalar" />
+          <EntitySet Name="TKayit" EntityType="DB01Model.TKayit" />
+          <EntitySet Name="TKullanici" EntityType="DB01Model.TKullanici" />
+          <EntitySet Name="TOgrenci" EntityType="DB01Model.TOgrenci" />
+          <EntitySet Name="TOgretmen" EntityType="DB01Model.TOgretmen" />
+          <AssociationSet Name="FK_TDosyaKayit_TDersler" Association="DB01Model.FK_TDosyaKayit_TDersler">
+            <End Role="TDersler" EntitySet="TDersler" />
+            <End Role="TDosyaKayit" EntitySet="TDosyaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TDersler" Association="DB01Model.FK_TKayit_TDersler">
+            <End Role="TDersler" EntitySet="TDersler" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TDosyaKayit_TDosyalar" Association="DB01Model.FK_TDosyaKayit_TDosyalar">
+            <End Role="TDosyalar" EntitySet="TDosyalar" />
+            <End Role="TDosyaKayit" EntitySet="TDosyaKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TOgrenci" Association="DB01Model.FK_TKayit_TOgrenci">
+            <End Role="TOgrenci" EntitySet="TOgrenci" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKayit_TOgretmen" Association="DB01Model.FK_TKayit_TOgretmen">
+            <End Role="TOgretmen" EntitySet="TOgretmen" />
+            <End Role="TKayit" EntitySet="TKayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKullanici_TOgrenci" Association="DB01Model.FK_TKullanici_TOgrenci">
+            <End Role="TOgrenci" EntitySet="TOgrenci" />
+            <End Role="TKullanici" EntitySet="TKullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TKullanici_TOgrenci1" Association="DB01Model.FK_TKullanici_TOgrenci1">
+            <End Role="TOgrenci" EntitySet="TOgrenci" />
+            <End Role="TKullanici" EntitySet="TKullanici" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TDersler">
+          <Key>
+            <PropertyRef Name="dersId" />
+          </Key>
+          <Property Name="dersId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dersKodu" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="dersAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dersKredi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TDosyaKayit" Relationship="DB01Model.FK_TDosyaKayit_TDersler" FromRole="TDersler" ToRole="TDosyaKayit" />
+          <NavigationProperty Name="TKayit" Relationship="DB01Model.FK_TKayit_TDersler" FromRole="TDersler" ToRole="TKayit" />
+        </EntityType>
+        <EntityType Name="TDosyaKayit">
+          <Key>
+            <PropertyRef Name="dkId" />
+          </Key>
+          <Property Name="dkId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dkDersId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dkDosyaId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TDersler" Relationship="DB01Model.FK_TDosyaKayit_TDersler" FromRole="TDosyaKayit" ToRole="TDersler" />
+          <NavigationProperty Name="TDosyalar" Relationship="DB01Model.FK_TDosyaKayit_TDosyalar" FromRole="TDosyaKayit" ToRole="TDosyalar" />
+        </EntityType>
+        <EntityType Name="TDosyalar">
+          <Key>
+            <PropertyRef Name="dosyaId" />
+          </Key>
+          <Property Name="dosyaId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dosyaAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dosyaFoto" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TDosyaKayit" Relationship="DB01Model.FK_TDosyaKayit_TDosyalar" FromRole="TDosyalar" ToRole="TDosyaKayit" />
+        </EntityType>
+        <EntityType Name="TKayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitDersId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitOgrId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitOgrtId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TDersler" Relationship="DB01Model.FK_TKayit_TDersler" FromRole="TKayit" ToRole="TDersler" />
+          <NavigationProperty Name="TOgrenci" Relationship="DB01Model.FK_TKayit_TOgrenci" FromRole="TKayit" ToRole="TOgrenci" />
+          <NavigationProperty Name="TOgretmen" Relationship="DB01Model.FK_TKayit_TOgretmen" FromRole="TKayit" ToRole="TOgretmen" />
+        </EntityType>
+        <EntityType Name="TKullanici">
+          <Key>
+            <PropertyRef Name="kulId" />
+          </Key>
+          <Property Name="kulId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kulAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kulSifre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kulYetki" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TOgrenci" Relationship="DB01Model.FK_TKullanici_TOgrenci" FromRole="TKullanici" ToRole="TOgrenci" />
+          <Property Name="kulOgrId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TOgrenci1" Relationship="DB01Model.FK_TKullanici_TOgrenci1" FromRole="TKullanici" ToRole="TOgrenci" />
+        </EntityType>
+        <EntityType Name="TOgrenci">
+          <Key>
+            <PropertyRef Name="ogrId" />
+          </Key>
+          <Property Name="ogrId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ogrNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ogrAdsoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ogrYas" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TKayit" Relationship="DB01Model.FK_TKayit_TOgrenci" FromRole="TOgrenci" ToRole="TKayit" />
+          <Property Name="ogrKulAdi" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ogrKulYetki" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ogrKulSifre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TKullanici" Relationship="DB01Model.FK_TKullanici_TOgrenci" FromRole="TOgrenci" ToRole="TKullanici" />
+          <NavigationProperty Name="TKullanici1" Relationship="DB01Model.FK_TKullanici_TOgrenci1" FromRole="TOgrenci" ToRole="TKullanici" />
+        </EntityType>
+        <EntityType Name="TOgretmen">
+          <Key>
+            <PropertyRef Name="ogrtId" />
+          </Key>
+          <Property Name="ogrtId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ogrtAdsoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TKayit" Relationship="DB01Model.FK_TKayit_TOgretmen" FromRole="TOgretmen" ToRole="TKayit" />
+        </EntityType>
+        <Association Name="FK_TDosyaKayit_TDersler">
+          <End Type="DB01Model.TDersler" Role="TDersler" Multiplicity="1" />
+          <End Type="DB01Model.TDosyaKayit" Role="TDosyaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDersler">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="TDosyaKayit">
+              <PropertyRef Name="dkDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TDersler">
+          <End Type="DB01Model.TDersler" Role="TDersler" Multiplicity="1" />
+          <End Type="DB01Model.TKayit" Role="TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDersler">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TDosyaKayit_TDosyalar">
+          <End Type="DB01Model.TDosyalar" Role="TDosyalar" Multiplicity="1" />
+          <End Type="DB01Model.TDosyaKayit" Role="TDosyaKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TDosyalar">
+              <PropertyRef Name="dosyaId" />
+            </Principal>
+            <Dependent Role="TDosyaKayit">
+              <PropertyRef Name="dkDosyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TOgrenci">
+          <End Type="DB01Model.TOgrenci" Role="TOgrenci" Multiplicity="1" />
+          <End Type="DB01Model.TKayit" Role="TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKayit_TOgretmen">
+          <End Type="DB01Model.TOgretmen" Role="TOgretmen" Multiplicity="1" />
+          <End Type="DB01Model.TKayit" Role="TKayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgretmen">
+              <PropertyRef Name="ogrtId" />
+            </Principal>
+            <Dependent Role="TKayit">
+              <PropertyRef Name="kayitOgrtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKullanici_TOgrenci">
+          <End Type="DB01Model.TOgrenci" Role="TOgrenci" Multiplicity="1" />
+          <End Type="DB01Model.TKullanici" Role="TKullanici" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TOgrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="TKullanici">
+              <PropertyRef Name="kulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TKullanici_TOgrenci1">
+          <End Type="DB01Model.TOgrenci" Role="TOgrenci" Multiplicity="1" />
+          <End Type="DB01Model.TKullanici" Role="TKullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOgrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="TKullanici">
+              <PropertyRef Name="kulOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB01ModelStoreContainer" CdmEntityContainer="DB01Entities">
+          <EntitySetMapping Name="TDersler">
+            <EntityTypeMapping TypeName="DB01Model.TDersler">
+              <MappingFragment StoreEntitySet="TDersler">
+                <ScalarProperty Name="dersKredi" ColumnName="dersKredi" />
+                <ScalarProperty Name="dersAdi" ColumnName="dersAdi" />
+                <ScalarProperty Name="dersKodu" ColumnName="dersKodu" />
+                <ScalarProperty Name="dersId" ColumnName="dersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TDosyaKayit">
+            <EntityTypeMapping TypeName="DB01Model.TDosyaKayit">
+              <MappingFragment StoreEntitySet="TDosyaKayit">
+                <ScalarProperty Name="dkDosyaId" ColumnName="dkDosyaId" />
+                <ScalarProperty Name="dkDersId" ColumnName="dkDersId" />
+                <ScalarProperty Name="dkId" ColumnName="dkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TDosyalar">
+            <EntityTypeMapping TypeName="DB01Model.TDosyalar">
+              <MappingFragment StoreEntitySet="TDosyalar">
+                <ScalarProperty Name="dosyaFoto" ColumnName="dosyaFoto" />
+                <ScalarProperty Name="dosyaAdi" ColumnName="dosyaAdi" />
+                <ScalarProperty Name="dosyaId" ColumnName="dosyaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TKayit">
+            <EntityTypeMapping TypeName="DB01Model.TKayit">
+              <MappingFragment StoreEntitySet="TKayit">
+                <ScalarProperty Name="kayitOgrtId" ColumnName="kayitOgrtId" />
+                <ScalarProperty Name="kayitOgrId" ColumnName="kayitOgrId" />
+                <ScalarProperty Name="kayitDersId" ColumnName="kayitDersId" />
+                <ScalarProperty Name="kayitId" ColumnName="kayitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TKullanici">
+            <EntityTypeMapping TypeName="DB01Model.TKullanici">
+              <MappingFragment StoreEntitySet="TKullanici">
+                <ScalarProperty Name="kulOgrId" ColumnName="kulOgrId" />
+                <ScalarProperty Name="kulYetki" ColumnName="kulYetki" />
+                <ScalarProperty Name="kulSifre" ColumnName="kulSifre" />
+                <ScalarProperty Name="kulAdi" ColumnName="kulAdi" />
+                <ScalarProperty Name="kulId" ColumnName="kulId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOgrenci">
+            <EntityTypeMapping TypeName="DB01Model.TOgrenci">
+              <MappingFragment StoreEntitySet="TOgrenci">
+                <ScalarProperty Name="ogrKulSifre" ColumnName="ogrKulSifre" />
+                <ScalarProperty Name="ogrKulYetki" ColumnName="ogrKulYetki" />
+                <ScalarProperty Name="ogrKulAdi" ColumnName="ogrKulAdi" />
+                <ScalarProperty Name="ogrYas" ColumnName="ogrYas" />
+                <ScalarProperty Name="ogrAdsoyad" ColumnName="ogrAdsoyad" />
+                <ScalarProperty Name="ogrNo" ColumnName="ogrNo" />
+                <ScalarProperty Name="ogrId" ColumnName="ogrId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOgretmen">
+            <EntityTypeMapping TypeName="DB01Model.TOgretmen">
+              <MappingFragment StoreEntitySet="TOgretmen">
+                <ScalarProperty Name="ogrtAdsoyad" ColumnName="ogrtAdsoyad" />
+                <ScalarProperty Name="ogrtId" ColumnName="ogrtId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

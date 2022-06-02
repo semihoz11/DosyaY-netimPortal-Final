@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+  <form [formGroup]="frm">
+    <mat-form-field appearance="outline">
+      <mat-label>Öğrenci No</mat-label>
+      <input matInput placeholder="Öğrenci No" formControlName="ogrNo" name="ogrNo" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Adı Soyadı</mat-label>
+      <input matInput placeholder="Adı Soyadı" formControlName="ogrAdsoyad" name="ogrAdsoyad" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Yaşı</mat-label>
+      <input matInput placeholder="Yaşı" formControlName="ogrYas" name="ogrYas" required type="number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Kullanıcı Adı</mat-label>
+      <input matInput placeholder="Kullanıcı Adı" formControlName="ogrKulAdi" name="ogrKulAdi" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Şifre</mat-label>
+      <input matInput placeholder="Şifre" formControlName="ogrKulSifre" name="ogrKulSifre" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Yetki</mat-label>
+      <input matInput placeholder="Yetki" formControlName="ogrKulYetki" name="ogrKulYetki" required type="text">
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" (click)="this.dialogRef.close(frm.value)" [disabled]="frm.invalid">Kaydet</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="this.dialogRef.close()">Vazgeç</button>
+</div>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB01ModelStoreContainer" CdmEntityContainer="DB01Entities">
+    <EntitySetMapping Name="TDersler">
+      <EntityTypeMapping TypeName="DB01Model.TDersler">
+        <MappingFragment StoreEntitySet="TDersler">
+          <ScalarProperty Name="dersKredi" ColumnName="dersKredi" />
+          <ScalarProperty Name="dersAdi" ColumnName="dersAdi" />
+          <ScalarProperty Name="dersKodu" ColumnName="dersKodu" />
+          <ScalarProperty Name="dersId" ColumnName="dersId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TDosyaKayit">
+      <EntityTypeMapping TypeName="DB01Model.TDosyaKayit">
+        <MappingFragment StoreEntitySet="TDosyaKayit">
+          <ScalarProperty Name="dkDosyaId" ColumnName="dkDosyaId" />
+          <ScalarProperty Name="dkDersId" ColumnName="dkDersId" />
+          <ScalarProperty Name="dkId" ColumnName="dkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TDosyalar">
+      <EntityTypeMapping TypeName="DB01Model.TDosyalar">
+        <MappingFragment StoreEntitySet="TDosyalar">
+          <ScalarProperty Name="dosyaFoto" ColumnName="dosyaFoto" />
+          <ScalarProperty Name="dosyaAdi" ColumnName="dosyaAdi" />
+          <ScalarProperty Name="dosyaId" ColumnName="dosyaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TKayit">
+      <EntityTypeMapping TypeName="DB01Model.TKayit">
+        <MappingFragment StoreEntitySet="TKayit">
+          <ScalarProperty Name="kayitOgrtId" ColumnName="kayitOgrtId" />
+          <ScalarProperty Name="kayitOgrId" ColumnName="kayitOgrId" />
+          <ScalarProperty Name="kayitDersId" ColumnName="kayitDersId" />
+          <ScalarProperty Name="kayitId" ColumnName="kayitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TKullanici">
+      <EntityTypeMapping TypeName="DB01Model.TKullanici">
+        <MappingFragment StoreEntitySet="TKullanici">
+          <ScalarProperty Name="kulOgrId" ColumnName="kulOgrId" />
+          <ScalarProperty Name="kulYetki" ColumnName="kulYetki" />
+          <ScalarProperty Name="kulSifre" ColumnName="kulSifre" />
+          <ScalarProperty Name="kulAdi" ColumnName="kulAdi" />
+          <ScalarProperty Name="kulId" ColumnName="kulId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOgrenci">
+      <EntityTypeMapping TypeName="DB01Model.TOgrenci">
+        <MappingFragment StoreEntitySet="TOgrenci">
+          <ScalarProperty Name="ogrKulSifre" ColumnName="ogrKulSifre" />
+          <ScalarProperty Name="ogrKulYetki" ColumnName="ogrKulYetki" />
+          <ScalarProperty Name="ogrKulAdi" ColumnName="ogrKulAdi" />
+          <ScalarProperty Name="ogrYas" ColumnName="ogrYas" />
+          <ScalarProperty Name="ogrAdsoyad" ColumnName="ogrAdsoyad" />
+          <ScalarProperty Name="ogrNo" ColumnName="ogrNo" />
+          <ScalarProperty Name="ogrId" ColumnName="ogrId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOgretmen">
+      <EntityTypeMapping TypeName="DB01Model.TOgretmen">
+        <MappingFragment StoreEntitySet="TOgretmen">
+          <ScalarProperty Name="ogrtAdsoyad" ColumnName="ogrtAdsoyad" />
+          <ScalarProperty Name="ogrtId" ColumnName="ogrtId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,69 @@
+<div class="container">
+  <button mat-fab color="accent" matTooltip="Ders Lİstesi" [routerLink]="['/ders']">
+    <mat-icon aria-label="label">arrow_back</mat-icon> 
+  </button>
+  <p>&nbsp;</p>
+  
+  <mat-label><h2>Ders Kodu : {{secDers?.dersKodu}}</h2></mat-label>
+  <mat-label><h2>Ders Adı : {{secDers?.dersAdi}}</h2></mat-label>
+  <mat-label><h2>Ders Kredisi : {{secDers?.dersKredi}}</h2></mat-label>
+
+  <p>&nbsp;</p>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Ders Seciniz</mat-label>
+    <mat-select placeholder="Ders Seçiniz" (selectionChange)="OgrenciSec($event.value)">
+      <mat-option [value]="ogrenci.ogrId"*ngFor="let ogrenci of ogrenciler">{{ogrenci.ogrAdsoyad}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;&nbsp;
+  <mat-form-field appearance="outline">
+    <mat-label>Oğretmen Seciniz</mat-label>
+    <mat-select placeholder="Ogretmen Seçiniz" (selectionChange)="OgretmenSec($event.value)">
+      <mat-option [value]="ogretmen.ogrtId"*ngFor="let ogretmen of ogretmenler">{{ogretmen.ogrtAdsoyad}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;&nbsp;
+  <button mat-fab color="primary" matTooltip="Ders Ekle" (click)="Kaydet()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <p>&nbsp;</p>
+  
+
+
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="ogrNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Oğrenci No 
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrBilgi.ogrNo}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ogrAdsoyad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adı Soyadı 
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrBilgi.ogrAdsoyad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ogrYas">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Yaş
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrBilgi.ogrYas}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> 
+      
+    
+        <button mat-icon-button matTooltip="Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      
+      </mat-cell>
+    </ng-container>
+    
+  
+    a-md-data-table-column
+    <!-- press ctrl + space to add more column snippet or delete this line -->
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

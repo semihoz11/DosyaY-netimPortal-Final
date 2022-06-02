@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Oturum AÇ</h2>
+  <mat-form-field appearance="outline" style="width: 50%;">
+    <mat-label>Kullanıcı Adı</mat-label>
+    <input matInput placeholder="Kullanıcı Adı" type="text" #ogrKulAdi>
+  </mat-form-field>&nbsp;
+  <mat-form-field appearance="outline" style="width: 50%;">
+    <mat-label>Şifre</mat-label>
+    <input matInput placeholder="Şifre" type="password" #ogrKulSifre>
+  </mat-form-field>
+  <p>&nbsp;</p>
+  <button mat-raised-button color="primary" (click)="UyeKontrol(ogrKulAdi.value,ogrKulSifre.value)" [routerLink]="[this.uyeUrl!]" >Oturum Aç</button>&nbsp;
+  <button mat-raised-button color="accent"(click)="Ekle()">Kayıt Ol</button>
+</div>
+

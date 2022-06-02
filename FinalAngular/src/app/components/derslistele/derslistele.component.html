@@ -1,0 +1,71 @@
+<div class="container">
+  <button mat-fab color="accent" matTooltip="Öğrenci Lİstesi" [routerLink]="['/ogrenci']">
+    <mat-icon aria-label="label">arrow_back</mat-icon> 
+  </button>
+  <p>&nbsp;</p>
+  
+  <mat-label><h2>Okul Numarası : {{secOgrenci?.ogrNo}}</h2></mat-label>
+  <mat-label><h2>Adı Soyadı  : {{secOgrenci?.ogrAdsoyad}}</h2></mat-label>
+
+  <p>&nbsp;</p>
+
+  <h1>Öğrenciye Ders Ekle</h1>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Ders Seciniz</mat-label>
+    <mat-select placeholder="Ders Seçiniz" (selectionChange)="DersSec($event.value)">
+      <mat-option [value]="ders.dersId"*ngFor="let ders of dersler">{{ders.dersAdi}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;&nbsp;
+  <mat-form-field appearance="outline">
+    <mat-label>Oğretmen Seciniz</mat-label>
+    <mat-select placeholder="Ogretmen Seçiniz" (selectionChange)="OgretmenSec($event.value)">
+      <mat-option [value]="ogretmen.ogrtId"*ngFor="let ogretmen of ogretmenler">{{ogretmen.ogrtAdsoyad}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;&nbsp;
+  <button mat-fab color="primary" matTooltip="Ders Ekle" (click)="Kaydet()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <h1>Ders Listesi</h1>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="dersKodu">
+      <mat-header-cell *matHeaderCellDef> Ders Kodu
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersKodu}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dersAdi">
+      <mat-header-cell *matHeaderCellDef> Ders Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersAdi}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="dersKredi">
+      <mat-header-cell *matHeaderCellDef> Ders Kredisi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersKredi}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ogrtBilgi">
+      <mat-header-cell *matHeaderCellDef> Öğretmen Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrtBilgi.ogrtAdsoyad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> 
+        <button mat-icon-button color="warn" matTooltip="Ders Kaydını Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>  
+      </mat-cell>
+    </ng-container>
+  
+    a-md-data-table-column
+    <!-- press ctrl + space to add more column snippet or delete this line -->
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+  <button mat-fab color="accent" matTooltip="Öğrenci Lİstesi" [routerLink]="['/ders']">
+    <mat-icon aria-label="label">arrow_back</mat-icon> 
+  </button>&nbsp;
+  <mat-table [dataSource]="dataSource">
+    
+    <ng-container matColumnDef="dersAdi">
+      <mat-header-cell *matHeaderCellDef> Ders Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi?.dersAdi}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="dosyaAdi">
+      <mat-header-cell *matHeaderCellDef> Dosya Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi?.dosyaAdi}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dosyaFoto">
+      <mat-header-cell *matHeaderCellDef> Dosya
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi?.dosyaFoto}} </mat-cell>
+      
+    </ng-container>
+    
+    
+  
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> 
+        <a href="http://localhost:65368//Dosyalar/{{kayit.dosyaBilgi.dosyaId}}.jpeg"  target="_blank"> Görüntüle </a>&nbsp;
+        <button mat-icon-button color="warn" matTooltip="Ders Kaydını Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>  
+      </mat-cell>
+    </ng-container>
+  
+    a-md-data-table-column
+    <!-- press ctrl + space to add more column snippet or delete this line -->
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

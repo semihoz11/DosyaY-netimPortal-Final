@@ -1,0 +1,61 @@
+<div class="container">
+
+  <p>&nbsp;</p>
+
+  <h1 style="color:black; font-size: xx-large; text-align: center;">Öğrenci Seç</h1>
+
+  <p>&nbsp;</p>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Oğretmen Seciniz</mat-label>
+    <mat-select placeholder="Ogretmen Seçiniz" (selectionChange)="OgretmenSec($event.value)">
+      <mat-option [value]="ogretmen.ogrtId"*ngFor="let ogretmen of ogretmenler">{{ogretmen.ogrtAdsoyad}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;&nbsp;
+
+  <mat-form-field>
+    <input matInput placeholder="Öğrenci Ara" (keyup)="Filtrele($event)">
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="ogrNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Oğrenci No 
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrNo}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ogrAdsoyad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adı Soyadı 
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrAdsoyad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ogrYas">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Yaş
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ogrYas}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> 
+        <button mat-icon-button color="primary" (click)="OgrenciSec(kayit,this.ogrtId)">
+          <mat-icon aria-label="label">person_add</mat-icon>Ekle
+        </button>
+        
+        
+        
+      
+      </mat-cell>
+    </ng-container>
+    
+  
+    a-md-data-table-column
+    <!-- press ctrl + space to add more column snippet or delete this line -->
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator 
+        
+        [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

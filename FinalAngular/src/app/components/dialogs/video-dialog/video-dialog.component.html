@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>Dosya Seç</span>
+</mat-toolbar>
+<div class="container">
+  <video [src]="secilenVideo" *ngIf="secilenVideo" style="width: 400px" ></video>
+  <input type="file" hidden="true" onclick="this.value=null " #videosec (change)="VideoSec($event)">&nbsp;
+  <button mat-raised-button color="primary" (click)="videosec.click()">Dosya Seç</button>&nbsp;
+  <button mat-raised-button color="primary" (click)="videoDialogRef.close(dersFoto)">Kaydet</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="videoDialogRef.close()">İptal</button>
+</div>
